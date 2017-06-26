@@ -9,7 +9,8 @@
 			[-2,1,0],		// 5 - hiddenpath
 			[-2,2,0],		// 6 - hiddenpath2
 			[-3,2,0],		// 7 - fallstop
-			[-3,3,0]		// 8 - mechanism
+			[-3,3,0],		// 8 - mechanism
+			[-3,2,-2]		// 9 - fallspool
 			];
 	var tempindex = 0;
 	var player = {
@@ -141,18 +142,18 @@
 				efalse:"You stand at the edge of a mostly-empty basin. Where the river leaves the basin, a huge, ramshackle gate is suspended over the river by a rope. The rope is firmly attached to a nearby tree, its knots drawn tight be the weight of the mechanism.",
 				etrue:"The gate is embedded in the muddy riverbed, and the cistern behind has began to fill, inch by inch. "}]
 		},
-		{name: "",
+		{name: "fallspool",
 		location : [-3,2,-2],					// X, Y, Z coordinates
 			visited: false,						// Visited boolean (always leave false)
-			description: "You are at the edge of a deep blue pool.",					// Description when you first arrive or look around
-			revisit: "",						// Brief description of location
-			directions: [],						// Available directions from this location
+			description: "You are at the eastern edge of a deep blue pool. A trickle of water still falls, its irregular splashing echoing off the rocks around you. To your north you see the entrance of a large tunnel. To the south a narrow path clings to the side of the cliff. ",					// Description when you first arrive or look around
+			revisit: "You are at the edge of a deep blue pool. There is a tunnel to your north and a narrow path that climbs south up an escarpment. ",						// Brief description of location
+			directions: ["N", "S"],						// Available directions from this location
 			item: [{name: "", idesc: ""}],		// Name and description (displayed when the item is on the ground) of an item
 			action: [{							// Interaction with items at this location
 				effectvar:"",					// Name of the global boolean for this effect
 				item:"",						// Item required for interact
 				adesc: ""}],					// Discription displayed when action is taken
-			elev: [{"":""}],					// One or more objects (like {"N":"down"},{"S":"up"}).
+			elev: [{"S":"down"}],					// One or more objects (like {"N":"down"},{"S":"up"}).
 			effects: [{status:"",				// Variable text depending on global changes. Status is a string
 				efalse:"",						// Text to display BEFORE interation
 				etrue:""}]						// Text to display AFTER interaction

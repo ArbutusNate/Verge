@@ -144,7 +144,7 @@
 		{name: "",
 		location : [-3,2,-2],					// X, Y, Z coordinates
 			visited: false,						// Visited boolean (always leave false)
-			description: "",					// Description when you first arrive or look around
+			description: "You are at the edge of a deep blue pool.",					// Description when you first arrive or look around
 			revisit: "",						// Brief description of location
 			directions: [],						// Available directions from this location
 			item: [{name: "", idesc: ""}],		// Name and description (displayed when the item is on the ground) of an item

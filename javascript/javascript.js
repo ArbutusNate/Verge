@@ -237,10 +237,7 @@
 			} else {
 				itemprint("revisit")
 			};
-			if((cchanges != "") &&
-				(cchanges != undefined) &&
-				(effectcheck === true) &&
-				((cdirections).includes(cchanges) === false)){
+			if((cchanges != "") && (cchanges != undefined) && (effectcheck === true) && ((cdirections).includes(cchanges) === false)){
 				console.log("adding a direction: " + cchanges)
 				debugger;
 				(cdirections).push(cchanges)

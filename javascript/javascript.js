@@ -142,7 +142,7 @@
 				etrue:"The gate is embedded in the muddy riverbed, and the cistern behind has began to fill, inch by inch. "}]
 		},
 		{name: "",
-		location : [9999,9999,9999],			// X, Y, Z coordinates
+		location : [-3,2,-2],					// X, Y, Z coordinates
 			visited: false,						// Visited boolean (always leave false)
 			description: "",					// Description when you first arrive or look around
 			revisit: "",						// Brief description of location
@@ -159,7 +159,7 @@
 		},
 	//New Location Template//
 		{name: "",
-		location : [9999,9999,9999],			// X, Y, Z coordinates
+		location : [9,9,9],			// X, Y, Z coordinates
 			visited: false,						// Visited boolean (always leave false)
 			description: "",					// Description when you first arrive or look around
 			revisit: "",						// Brief description of location
@@ -173,7 +173,7 @@
 			effects: [{status:"",				// Variable text depending on global changes. Status is a string
 				efalse:"",						// Text to display BEFORE interation
 				etrue:"",						// Text to display AFTER interaction
-				changes:""}]					// 
+				changes:""}]					// New directions that can be added (opening a door etc.)
 		},
 	//New Location Template//
 	];

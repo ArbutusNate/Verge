@@ -86,10 +86,11 @@
 			elev: [{"N":"down"},{"S":"up"}],
 			effects: [{status:"waterfall",
 				efalse:"Through the mist to your north you can just make out the torrent of water. A buffeting wind whips the mist into a horizontal storm, blasting south. The narrow path you are on slopes down towards the north and the base of the falls, but is made impassable by the falling water. It travels up and south towards the edge of the ravine. ",
-				etrue:"Mist settles on the moss around you but the falls are dry. Across a deep pool to your north you can see the entrance to a tunnel. The path climbs south to the lip of the ravine."}]
+				etrue:"Mist settles on the moss around you but the falls are dry. Across a deep pool to your north you can see the entrance to a tunnel. The path climbs south to the lip of the ravine. ",
+				changes:"N"}]
 		},
 		{name: "hiddenpath",
-			location : [-2,1,0],
+		location : [-2,1,0],
 			visited: false,
 			description: "The forest presses in around you but you can follow the signs of passage ahead of you. ",
 			revisit: "You are on a barely-visible trail, enclosed in trees. ",
@@ -102,7 +103,7 @@
 				etrue:"Besides occasional birdsong, it is quiet here. "}]
 		},
 		{name: "hiddenpath2",
-			location : [-2,2,0],
+		location : [-2,2,0],
 			visited: false,
 			description: "At the base of a large tree the path veers abruptly west. ",
 			revisit: "At the base of a large tree the path veers abruptly west. ",
@@ -115,7 +116,7 @@
 				etrue:""}]
 		},
 		{name: "fallstop",
-			location : [-3,2,0],
+		location : [-3,2,0],
 			visited: false,
 			description: "You are on the bank of a river, just upstream of a large cliff. ",
 			revisit: "",
@@ -128,7 +129,7 @@
 				etrue:"The riverbed here is dry, as are the falls. "}]
 		},
 		{name: "mechanism",
-			location : [-3,3,0],
+		location : [-3,3,0],
 			visited: false,
 			description: "",
 			revisit: "",
@@ -140,24 +141,41 @@
 				efalse:"You stand at the edge of a mostly-empty basin. Where the river leaves the basin, a huge, ramshackle gate is suspended over the river by a rope. The rope is firmly attached to a nearby tree, its knots drawn tight be the weight of the mechanism.",
 				etrue:"The gate is embedded in the muddy riverbed, and the cistern behind has began to fill, inch by inch. "}]
 		},
-		//New Location Template//
-			{name: "",
-				location : [0,0,0], 				// X, Y, Z coordinates
-				visited: false,						// Visited boolean
-				description: "",					// Description when you first arrive or look around
-				revisit: "",						// Brief description of location
-				directions: [],						// Available directions from this location
-				item: [{name: "", idesc: ""}],		// Name and description (displayed when the item is on the ground) of an item
-				action: [{							// Interaction with items at this location
-					effectvar:"",					// Name of the global boolean for this effect
-					item:"",						// Item required for interact
-					adesc: ""}],					// Discription displayed when action is taken
-				elev: [{"":""}],					// One or more objects (like {"N":"down"},{"S":"up"}).
-				effects: [{status:"waterfall",		// Variable text depending on global changes. Status is a string
-					efalse:"",						// Text to display BEFORE interation
-					etrue:""}]						// Text to display AFTER interaction
-			},
-		//New Location Template//
+		{name: "",
+		location : [9999,9999,9999],			// X, Y, Z coordinates
+			visited: false,						// Visited boolean (always leave false)
+			description: "",					// Description when you first arrive or look around
+			revisit: "",						// Brief description of location
+			directions: [],						// Available directions from this location
+			item: [{name: "", idesc: ""}],		// Name and description (displayed when the item is on the ground) of an item
+			action: [{							// Interaction with items at this location
+				effectvar:"",					// Name of the global boolean for this effect
+				item:"",						// Item required for interact
+				adesc: ""}],					// Discription displayed when action is taken
+			elev: [{"":""}],					// One or more objects (like {"N":"down"},{"S":"up"}).
+			effects: [{status:"",				// Variable text depending on global changes. Status is a string
+				efalse:"",						// Text to display BEFORE interation
+				etrue:""}]						// Text to display AFTER interaction
+		},
+	//New Location Template//
+		{name: "",
+		location : [9999,9999,9999],			// X, Y, Z coordinates
+			visited: false,						// Visited boolean (always leave false)
+			description: "",					// Description when you first arrive or look around
+			revisit: "",						// Brief description of location
+			directions: [],						// Available directions from this location
+			item: [{name: "", idesc: ""}],		// Name and description (displayed when the item is on the ground) of an item
+			action: [{							// Interaction with items at this location
+				effectvar:"",					// Name of the global boolean for this effect
+				item:"",						// Item required for interact
+				adesc: ""}],					// Discription displayed when action is taken
+			elev: [{"":""}],					// One or more objects (like {"N":"down"},{"S":"up"}).
+			effects: [{status:"",				// Variable text depending on global changes. Status is a string
+				efalse:"",						// Text to display BEFORE interation
+				etrue:"",						// Text to display AFTER interaction
+				changes:""}]					// 
+		},
+	//New Location Template//
 	];
 // Navigation Functions
 	function updown(){
@@ -179,7 +197,7 @@
 		function itemprint(t){
 			debugger;
 			var newtext = $("<p style=display:none>")
-			var statusvar = current.effects[0].status
+			// var statusvar = current.effects[0].status
 			var effectcheck = window[(current.effects[0].status)]
 			// var currenteffect = caction.effectvar
 			// if(effectcheck === undefined){};
@@ -200,11 +218,15 @@
 		function atlocation(){
 			console.log("Player location is " + player.currentloc + ".")
 			console.log(current);
+			// var statusvar = current.effects[0].status
+			var effectcheck = window[(current.effects[0].status)]
+			var cdirections = current.directions
+			var cchanges = current.effects[0].changes
 			$(".db")
 				.prop('disabled', true)
 				.addClass("disabled");
-			for (var i = 0; i < current.directions.length; i++) {
-				var dirvar = current.directions[i];
+			for (var i = 0; i < cdirections.length; i++) {
+				var dirvar = cdirections[i];
 				$("#" + dirvar)
 					.prop('disabled', false)
 					.removeClass("disabled");
@@ -215,6 +237,20 @@
 			} else {
 				itemprint("revisit")
 			};
+			if((cchanges != "") &&
+				(cchanges != undefined) &&
+				(effectcheck === true) &&
+				((cdirections).includes(cchanges) === false)){
+				console.log("adding a direction: " + cchanges)
+				debugger;
+				(cdirections).push(cchanges)
+				for (var i = 0; i < cdirections.length; i++) {
+					var dirvar = cdirections[i];
+					$("#" + dirvar)
+						.prop('disabled', false)
+						.removeClass("disabled");
+				}
+			}
 		};
 		function checklocation(){
 			var hash = {};

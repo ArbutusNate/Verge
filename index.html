@@ -7,66 +7,49 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Metamorphous|Open+Sans|Righteous" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="./assets/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
-	<div class="containter">
-		<div class="row headrow">
-			<div class="col-md-12 head">
-				<h1>The Verge</h1>
-			</div>
-		</div>
-		<div class="row inforow">
-			<div class="col-md-4 inventoryframe">
-				<div class="row">
-					<div class="col-md-12 inventory">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 textframe">
-				<div class="row">
-					<div class="col-md-12 textarea">
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 controlframe">
-				<div class="row">
-					<div class="col-md-12 control">
-						<div class="buttonbox">
-							<div class="row">
-								<div class="col-md-12 dbutton">
-									<button id="N" class="db">North</button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 dbutton">
-									<button id="W" class="db">West</button>
-								</div>
-								<div class="col-md-4">
-									<button id="look">Look</button>
-								</div>
-								<div class="col-md-4 dbutton">
-									<button id="E" class="db">East</button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12 dbutton">
-									<button id="S" class="db">South</button>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<button id="grab">Grab</button>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<!-- Header -->
+	<div id="header">
+		<h3> Welcome to Verge </h3>
 	</div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script src="./javascript/javascript.js"></script>
+
+	<div id="text-box">
+
+	</div>
+
+	<div id="inv">
+
+	</div>
+
+	<div id="ctrl">
+		<button class="mvmt"
+			data-index="1"
+			data-value="+1">North
+		</button>
+		<button class="mvmt"
+			data-index="0"
+			data-value="+1">East
+		</button>
+		<button class="mvmt"
+			data-index="1"
+			data-value="-1">South
+		</button>
+		<button class="mvmt"
+			data-index="0"
+			data-value="-1">West
+		</button>
+	</div>
+
+
+	<!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+   <!-- Controller -->
+		<script src="./javascript/controller.js"></script>
 </body>
 </html>

@@ -49,6 +49,37 @@
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous">
     </script>
+<!--     <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+
+    <script>
+          var db = new Dexie("game_data");
+          db.version(1).stores({
+              gameData: 'visited, coordinate'
+          });
+
+          //
+          // Put some data into it
+          //
+          db.gameData.put({visited: 'yes', coordinate: '0,0,0'}).then (function(){
+              //
+              // Then when data is stored, read from it
+              //
+              return db.gameData.get('visited');
+          }).then(function (visited) {
+              //
+              // Display the result
+              //
+              console.log(gameData.visited);
+          }).catch(function(error) {
+             //
+             // Finally don't forget to catch any error
+             // that could have happened anywhere in the
+             // code blocks above.
+             //
+             alert ("Ooops: " + error);
+          });
+    </script> -->
+
    <!-- Controller -->
 		<script src="./javascript/controller.js"></script>
 </body>

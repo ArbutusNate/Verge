@@ -9,7 +9,8 @@
     "-1,0,0": {
       "visited" : false,
       "description" : "A breeze barely stirs the branches above your head. The track lies mainly in the tall, sunny grass, but occasionally leads you into the park-like interface of shade and sun. The ground here is covered in thick duff. ",
-      "revisit" : "You done did it!"
+      "revisit": "You are on a path in woods. To the east through the trees you can just make out a worn signpost. ",
+      "directions" : ["W", "N"]
     }
   }
 }

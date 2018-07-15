@@ -2,9 +2,35 @@
 
 var World;
 var playerLocation = '0,0,0';
-
+const $NewText = (htmlClass, content, extraContent = null) => {
+  // Builds <p> DOM element.
+  if (!extraContent === null) {
+    let fullContent = content + extraContent;
+    return $(`<p class="${htmlClass}"> ${fullContent} </p>`)
+  } else {
+    let fullContent = content;
+    return $(`<p class="${htmlClass}"> ${fullContent} </p>`)
+  }
+}
 
 // Functions
+
+const getZone = (playerLocation) => { //Called from movePlayer
+  // Find the location in World.JSON
+  let current = World[playerLocation];
+  let $textToAdd
+  // Set up DOM element
+  !checkVisit(playerLocation) ?
+    $textToAdd = $NewText('story', current.description)
+    :
+    $textToAdd = $NewText('story', current.revisit)
+  //Append <p> to text box.
+  $('#text-box').append($textToAdd);
+  // Save changes to localStorage
+  saveChangesLocal(playerLocation);
+  // Check movement options and disable unusable buttons
+  checkMovementOptions(current);
+}
 
 const movePlayer = (clicked) => {
   // Turn string coordinates to array.
@@ -21,31 +47,11 @@ const movePlayer = (clicked) => {
   // console.log(newLocation);
   playerLocation = newLocation;
   getZone(playerLocation);
-  //Save Visits in local storage? cookies?
 }
 
-const getZone = (playerLocation) => {
-  // Find the location in World.JSON.
-  let current = World[playerLocation];
-  let $textToAdd
-  // Set up DOM element
-  !checkVisit(playerLocation) ? 
-    $textToAdd = $NewText('story', current.description)
-    :
-    $textToAdd = $NewText('story', current.revisit)
-  //Append <p> to text box.
-  $('#text-box').append($textToAdd);
-  saveChangesLocal(playerLocation);
-}
-
-const $NewText = (htmlClass, content) => {
-  // Builds <p> DOM element.
-  return $(`<p class="${htmlClass}"> ${content} </p>`)
-}
-
+//Checks which message to display (visit or revisit)
 const checkVisit = (playerLocation) => {
   let alreadyVisited = localStorage.getItem('visited');
-  console.log(`Already Visited: ${alreadyVisited}`);
   if (alreadyVisited.includes(playerLocation)) {
     return true
   } else {
@@ -53,7 +59,27 @@ const checkVisit = (playerLocation) => {
   }
 }
 
-const saveChangesLocal = (visited, effects) => {
+//Checks which way the player can move from their current location
+const checkMovementOptions = (playerLocation) => {
+  //Gets possible directions from World
+  let movementOptions = playerLocation.directions;
+  console.log(movementOptions);
+  // Runs thru all buttons...
+  $('.mvmt').each(function() {
+    // Disables them all...
+    $(this).attr('disabled', 'disabled');
+    let direction = $(this).attr('data-direction');
+    // And reenables those that can used...
+    if((movementOptions).includes(direction)) {
+      console.log('triggering on ' + direction)
+      $(this).removeAttr('disabled');
+    }
+  })
+
+}
+
+//Saves changes in localStorage
+const saveChangesLocal = (visited, effects, items) => {
   // if already visited, do nothing
   if (checkVisit(visited)){
     return

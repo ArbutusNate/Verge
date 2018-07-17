@@ -2,15 +2,9 @@
 
 var World;
 var playerLocation = '0,0,0';
-const $NewText = (htmlClass, content, extraContent = null) => {
-  // Builds <p> DOM element.
-  if (!extraContent === null) {
-    let fullContent = content + extraContent;
-    return $(`<p class="${htmlClass}"> ${fullContent} </p>`)
-  } else {
-    let fullContent = content;
-    return $(`<p class="${htmlClass}"> ${fullContent} </p>`)
-  }
+const $NewText = (fullContent) => {
+  // Builds <p> DOM element
+    return $textToAdd = $(`<p class="story"> ${fullContent} </p>`)
 }
 
 // Functions
@@ -18,12 +12,13 @@ const $NewText = (htmlClass, content, extraContent = null) => {
 const getZone = (playerLocation) => { //Called from movePlayer
   // Find the location in World.JSON
   let current = World[playerLocation];
-  let $textToAdd
+  let $textToAdd;
   // Set up DOM element
-  !checkVisit(playerLocation) ?
-    $textToAdd = $NewText('story', current.description)
-    :
-    $textToAdd = $NewText('story', current.revisit)
+  // !checkVisit(playerLocation) ?
+  //   $textToAdd = $NewText(current.description)
+  //   :
+  //   $textToAdd = $NewText(current.revisit)
+  checkEverything(playerLocation);
   //Append <p> to text box.
   $('#text-box').append($textToAdd);
   // Save changes to localStorage
@@ -49,6 +44,26 @@ const movePlayer = (clicked) => {
   getZone(playerLocation);
 }
 
+//Check Everything
+const checkEverything = (playerLocation) => {
+  let fullContent;
+  let effect;
+  checkVisit(playerLocation) ?
+    fullContent = current.revisit :
+    fullContent = current.description;
+  checkItem(playerLocation) ?
+    fullContent + current.item.idesc :
+    fullContent = fullContent;
+  checkEffect(playerLocation) ?
+    fullContent + current.
+
+  // checkVisit
+  // checkItem
+  // checkEffect
+
+}
+
+
 //Checks which message to display (visit or revisit)
 const checkVisit = (playerLocation) => {
   let alreadyVisited = localStorage.getItem('visited');
@@ -57,6 +72,31 @@ const checkVisit = (playerLocation) => {
   } else {
     return false
   }
+}
+
+const checkItem = (playerLocation) => {
+  if(playerLocation.item === "") {
+    return false
+  } else {
+    return true
+  }
+}
+
+
+//This needs work...need to speicify effect somehow
+const checkEffect = (playerLocation) => {
+  let playerEffects = localStorage.getItem('effects');
+  playerEffects = playerEffects.keys();
+  let currentLocationEffects = playerLocation.effects;
+  currentLocationEffects = currentLocationEffects.keys();
+  currentLocationEffects.forEach(function(i) {
+    if(playerEffects.includes(i)) {
+      // Specify in here somewhere...somehow?
+      return true
+    } else {
+      return false
+    }
+  })
 }
 
 //Checks which way the player can move from their current location
@@ -75,8 +115,9 @@ const checkMovementOptions = (playerLocation) => {
       $(this).removeAttr('disabled');
     }
   })
-
 }
+
+
 
 //Saves changes in localStorage
 const saveChangesLocal = (visited, effects, items) => {
@@ -96,12 +137,13 @@ const saveChangesLocal = (visited, effects, items) => {
 $().ready( () => {
   // AJAX call for World.JSON
   worldImport = $.getJSON('javascript/world.json', () => {
-  // Get rid of AJAX metadata.
-  World = worldImport.responseJSON.world
-  localStorage.setItem('visited', '');
-  localStorage.setItem('effects', '');
-  // Fire it up
-  getZone(playerLocation);
+    // Get rid of AJAX metadata
+    World = worldImport.responseJSON.world
+    // Initializes local storage
+    localStorage.setItem('visited', '');
+    localStorage.setItem('effects', '');
+    // Fire it up
+    getZone(playerLocation);
   });
 });
 

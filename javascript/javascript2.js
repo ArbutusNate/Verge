@@ -23,7 +23,8 @@
 			revisit: "You are on a path in woods. To the east through the trees you can just make out a worn signpost. ",
 			directions: ["E","W"],
 			item: [
-				{name: "Stick", idesc: "There is a sturdy-looking stick on the ground. "}
+				{name: "Stick",
+				idesc: "There is a sturdy-looking stick on the ground. "}
 				],
 			action: [{item:"", adesc: ""}],
 			elev: [{"":""}],

@@ -1,19 +1,22 @@
 {
   "world" : {
     "0,0,0" : {
-      "visited" : false,
       "description" : "You find yourself at the edge, at a crossroads. Dappled sunlight filters through the trees on the verge of a great forest as their terminal boughs stretch over patchy grass. The sound of pollinating insects and birds fill the air and the smell of warm grass wafts towards you from the south on the occasional breeze. Just beside you are the remains of a faded signpost. Beneath your feet is the crossing of two roads. One is a footpath that travels approximately south and north, the other a track that winds in and out of shadow as it follows the edge of the forest. The northern path plunges into the forest and is quickly lost amongst the trees. To the east the track heads off towards a massive windmill just visible above the trees. The southern path appears to lead across rolling golden plains forever. In the middle distance a thin line of smoke rises as if from a cookfire. ",
       "revisit" : "You are back at the crossroads at the verge of the forest.",
       "directions" : ["W"]
     },
     "-1,0,0": {
-      "visited" : false,
       "description" : "A breeze barely stirs the branches above your head. The track lies mainly in the tall, sunny grass, but occasionally leads you into the park-like interface of shade and sun. The ground here is covered in thick duff. ",
       "revisit": "You are on a path in woods. To the east through the trees you can just make out a worn signpost. ",
-      "directions" : ["W", "N"],
-      "item": [
-        {"name": "Stick", "idesc": "There is a sturdy-looking stick on the ground. "}
-        ]
+      "directions" : ["E"],
+      "items": [
+        {"name": "Stick",
+        "idesc": "There is a sturdy-looking stick on the ground. "}
+        ],
+      "effects": [
+        {"name":"waterfall",
+        "einitial" :"From the west you hear the rumble of water. ",
+        "echanged" :"The drone of insects and the sound of birds is all you can hear."}]
     }
   }
 }
